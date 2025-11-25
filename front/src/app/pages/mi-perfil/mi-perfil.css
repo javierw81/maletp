@@ -1,0 +1,131 @@
+/* Paleta de colores principal:#734443 secundario:#b8aba5 texto y bordes: principal: #211f1c secundario: #4e3a3a */
+
+
+.perfil-deportista-container {
+    
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+}
+
+/* CARD PRINCIPAL (CON TOOS LOS DATOS) */
+.perfil-card {
+    padding-top: 4rem;
+    background-color: #734443 ;
+    border: none;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 2px 0rem 2rem #211f1c;
+    color: #211f1c;
+}
+
+.banner-accion {
+    height: 150px;
+    position: relative;
+    background-color: #a39995;
+}
+
+.profile-photo-wrapper {
+    position: absolute;
+    top: 100px; 
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
+.profile-photo-bs {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border: 5px solid #b8aba5;
+    box-shadow: 0 0 0 8px var(#4e3a3a);
+}
+
+.name-titles {
+    color: #211f1c;
+}
+
+.username-title-bs {
+    font-size: 2.5rem;
+    color: #211f1c;
+    font-weight: 700;
+}
+.real-name-bs {
+    color: #211f1c;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+/* BARRA DE ESTADÍSTICAS CON NUMEROS */
+.stats-bar-bs {
+    background-color: #383131;
+    border-radius: 10px;
+    border-left: 5px solid #211f1c;
+}
+.stat-number-bs {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #b8aba5;
+}
+.stat-label-bs {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: #211f1c;
+    font-weight: 700;
+}
+.border-end {
+    border-color: #211f1c !important;
+}
+
+/* INFORMACION */
+.info-card-bs {
+    background-color: #383131;
+    border-radius: 8px;
+    border-left: 4px solid #211f1c;
+    color: #b8aba5;
+}
+.info-title-bs {
+    font-weight: 600;
+    color:   #211f1c;
+    border-bottom: 1px solid #211f1c;
+    padding-bottom: 8px;
+    margin-bottom: 12px;
+}
+
+.bio-text-bs {
+    font-style: italic;
+    color: #83736b;
+}
+
+/* PUBLICACIONES RECIENTES */
+
+.posts-list {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.post-card-bs {
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.post-card-bs:hover {
+    transform: scale(1.05);
+}
+
+
+
+/* BOTÓN*/
+.btn-success-custom {
+    background-color: #734443 !important;
+    border-color: #383131 !important;
+    color: #383131 !important;
+    font-weight: 600;
+    border-radius: 50px;
+    transition: background-color 0.3s;
+}
+.btn-success-custom:hover {
+    background-color: #5c3534 !important;
+    border-color: #5c3534 !important;
+}

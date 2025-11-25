@@ -1,0 +1,164 @@
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-xl-7">
+            <div class="card shadow-lg border-0 rounded-3">
+                <div class="card-body p-4 p-md-5">
+                    <h1 class="card-title text-center mb-4 pb-2 border-bottom border-primary text-primary fw-bold">
+                        Crear Nueva Publicación
+                    </h1>
+
+                    <form [formGroup]="postForm" (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
+
+                        <div class="mb-3">
+                            <label for="titulo" class="form-label fw-semibold">Título (Máx. 50 caracteres)</label>
+                            <input id="titulo" formControlName="titulo" type="text" class="form-control" placeholder="Escribe un título conciso..." 
+                            [class.is-invalid]="postForm.get('titulo')?.invalid && postForm.get('titulo')?.touched"
+                            appRedInvalidInput autocomplete="off">
+
+                            @if (postForm.get('titulo')?.invalid && postForm.get('titulo')?.touched) {
+                                <div class="invalid-feedback">
+                                    @if (postForm.get('titulo')?.errors?.['required']) {
+                                        <span class="fw-bold">El título es obligatorio.</span>
+                                    }
+                                    @if (postForm.get('titulo')?.errors?.['maxlength']) {
+                                        <span class="fw-bold">El título no puede exceder los 50 caracteres.</span>
+                                    }
+                                    @if (postForm.get('titulo')?.errors?.['soloEspacios']) {
+                                        <span class="fw-bold">El mensaje no puede tener solo estacios.</span>
+                                    }
+                                </div>
+                            }
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="mensaje" class="form-label fw-semibold">Mensaje/Contenido (Máx. 150 caracteres)</label>
+                            <textarea id="mensaje" formControlName="mensaje" rows="4" class="form-control" placeholder="¿Qué quieres compartir con la comunidad?" 
+                            [class.is-invalid]="postForm.get('mensaje')?.invalid && postForm.get('mensaje')?.touched" appRedInvalidInput autocomplete="off"
+                            ></textarea>
+
+                            @if (postForm.get('mensaje')?.invalid && postForm.get('mensaje')?.touched) {
+                                <div class="invalid-feedback">
+                                    @if (postForm.get('mensaje')?.errors?.['required']) {
+                                        <span class="fw-bold">El mensaje es obligatorio.</span>
+                                    }
+                                    @if (postForm.get('mensaje')?.errors?.['maxlength']) {
+                                        <span class="fw-bold">El mensaje no puede exceder los 150 caracteres.</span>
+                                    }
+                                    @if (postForm.get('mensaje')?.errors?.['soloEspacios']) {
+                                        <span class="fw-bold">El mensaje no puede tener solo estacios.</span>
+                                    }
+                                </div>
+                            }
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="tipoPublicacion" class="form-label fw-semibold">Tipo de Publicación</label>
+                                <select 
+                                id="tipoPublicacion" 
+                                formControlName="tipoPublicacion" 
+                                class="form-select"
+                                [class.is-invalid]="postForm.get('tipoPublicacion')?.invalid && postForm.get('tipoPublicacion')?.touched"
+                                appRedInvalidInput>
+                                <option value="" disabled>Selecciona un tipo...</option>
+                                @for (tipo of tiposPublicacion; track tipo) {
+                                    <option [value]="tipo">{{ tipo }}</option>
+                                }
+                                </select>
+                                @if (postForm.get('tipoPublicacion')?.invalid && postForm.get('tipoPublicacion')?.touched) {
+                                    <div class="invalid-feedback">
+                                        @if (postForm.get('tipoPublicacion')?.errors?.['required']) {
+                                            <span class="fw-bold">Debes seleccionar un tipo de publicacion.</span>
+                                        }
+                                    </div>
+                                }
+                            
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="deporte" class="form-label fw-semibold">Deporte Asociado</label>
+                                <select 
+                                id="deporte" 
+                                formControlName="deporte" 
+                                class="form-select"
+                                [class.is-invalid]="postForm.get('deporte')?.invalid && postForm.get('deporte')?.touched"
+                                appRedInvalidInput>
+                                    <option value="" disabled>Selecciona un deporte...</option>
+                                    @for (deporte of deportes; track deporte) {
+                                        <option [value]="deporte">{{ deporte }}</option>
+                                    }
+                                </select>
+                                @if (postForm.get('deporte')?.invalid && postForm.get('deporte')?.touched) {
+                                    <div class="invalid-feedback">
+                                        @if (postForm.get('deporte')?.errors?.['required']) {
+                                            <span class="fw-bold">Debes seleccionar un deporte.</span>
+                                        }
+                                    </div>
+                                }
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="imagenPost" class="form-label fw-semibold">Imagen (Archivo)</label>
+                            <input 
+                                id="imagenPost" 
+                                type="file" 
+                                (change)="onFileSelected($event)" 
+                                accept="image/*"
+                                class="form-control"
+                                [class.is-invalid]="postForm.get('imagenPost')?.invalid && postForm.get('imagenPost')?.touched">
+                            @if (postForm.get('imagenPost')?.invalid && postForm.get('imagenPost')?.touched) {
+                                <div class="invalid-feedback">
+                                    @if (postForm.get('imagenPost')?.errors?.['archivoRequerido']) {
+                                        <span>La imagen de perfil es obligatoria.</span>
+                                    } 
+                                </div>
+                            }
+                            
+                            @if (postForm.get('imagenPost')?.value) {
+                                @if (imagenURL()) {
+                                <div class="mt-3 text-center border p-2 rounded" 
+                                     style="border-color: var(--color-borde-secundario) !important;">
+                                    <h6 class="fw-bold mb-2">Previsualización:</h6>
+                                    <img 
+                                        [src]="imagenURL()" 
+                                        alt="Previsualización de imagen" 
+                                        class="img-fluid rounded shadow-sm"
+                                        style="max-height: 250px; object-fit: cover; width: auto;"
+                                    >
+                                </div>
+                            }
+                            }
+                            
+                        </div>
+
+                        @if (postForm.invalid && postForm.touched) {
+                            <div class="alert alert-danger mb-4" role="alert">
+                                <h5 class="alert-heading">¡Atención!</h5>
+                                Revisa los campos marcados en rojo antes de publicar.
+                            </div>
+                        }
+
+                        @if (cargando()) {
+                    <div class="loading-message">
+                        <span class="spinner-border spinner-border-sm" role="status"></span>
+                        Cargando, por favor espere...
+                    </div>
+                    } 
+
+                        <div class="d-grid gap-2">
+                            <button 
+                                type="submit" 
+                                [disabled]="postForm.invalid"
+                                class="btn btn-primary btn-lg"
+                            >
+                                Publicar
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

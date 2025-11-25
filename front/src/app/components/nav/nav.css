@@ -1,0 +1,61 @@
+/* Paleta de Colores:
+   Principal: #734443
+   Secundario: #b8aba5
+   Texto/Bordes 1: #211f1c
+   Texto/Bordes 2: #4e3a3a
+*/
+
+.navbar-brand {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.navbarColor {
+    background-color: #734443;
+}
+
+.nav-link {
+    color: #211f1c ; 
+    font-weight: 500;
+    margin: 0 10px; 
+    transition: all 0.2s ease-in-out;
+}
+
+.nav-link:hover {
+    color: #211f1c; 
+    background-color: #b8aba5; 
+    border-radius: 5px; 
+}
+
+.btn-color-2 {
+    background-color: #4e3a3a; 
+    color: #ffffff;
+    border-color: #4e3a3a;
+    font-weight: 600;
+}
+
+.btn-color-2:hover {
+    background-color: #211f1c; 
+    border-color: #211f1c;
+}
+
+
+.btn-color-1 {
+    color: #b8aba5; 
+    border-color: #b8aba5; 
+    font-weight: 600;
+}
+
+.btn-color-1:hover {
+    background-color: #b8aba5; 
+    color: #211f1c;
+    border-color: #b8aba5;
+}
+
+.navbar-btn span {
+    color: #211f1c; 
+    font-weight: 500;
+    align-self: center; 
+    margin-right: 15px;
+}
+
+

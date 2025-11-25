@@ -1,0 +1,74 @@
+/* Paleta de colores principal: #734443 (Primario) secundario: #b8aba5 (Secundario/Fondo Claro) texto y bordes: principal: #211f1c (Texto Oscuro/Fuerte) secundario: #4e3a3a (Texto Secundario/Bordes) */
+
+
+:root {
+    --color-principal: #734443;
+    --color-secundario: #b8aba5;
+    --color-texto-fuerte: #211f1c;
+    --color-borde-secundario: #4e3a3a;
+    --color-fondo-claro: #f8f7f5; 
+}
+
+body {
+    background-color: var(--color-secundario); 
+}
+
+.container {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+.card {
+    border: 1px solid var(--color-borde-secundario) !important;
+    background-color: var(--color-fondo-claro) !important;
+    color: var(--color-texto-fuerte) !important;
+}
+
+.card-title {
+    color: var(--color-principal) !important;
+    border-color: var(--color-principal) !important;
+}
+
+/* 5. Inputs y Selects */
+.form-control, .form-select {
+    border-color: var(--color-borde-secundario);
+    color: var(--color-texto-fuerte);
+    background-color: white;
+}
+
+.form-control:focus, .form-select:focus {
+    box-shadow: 0 0 0 0.25rem rgba(115, 68, 67, 0.25); /* Sombra de enfoque con color principal */
+}
+
+.invalid-feedback {
+    color: #dc3545 !important; 
+}
+
+/* 7. Botón Principal (btn-primary) */
+.btn-primary {
+    background-color: var(--color-principal) !important;
+    border-color: var(--color-principal) !important;
+    color: white !important;
+    font-weight: 600;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.btn-primary:hover {
+    background-color: #5d3736 !important; /* Un tono más oscuro del principal para hover */
+    border-color: #5d3736 !important;
+}
+
+
+.alert-info {
+    background-color: var(--color-secundario) !important;
+    border-color: var(--color-borde-secundario) !important;
+    color: var(--color-texto-fuerte) !important;
+}
+
+
+.alert-danger {
+    background-color: #f8d7da; 
+    border-color: #f5c6cb;
+
+    color: #842029 !important; 
+}

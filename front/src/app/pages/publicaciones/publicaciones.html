@@ -1,0 +1,102 @@
+<div class="posts-page-container">
+  
+  <h1>Publicaciones</h1>
+
+
+  <div class="posts-info">
+    
+    <button routerLink="/crearPublicacion">Crear Publicacion</button>
+
+    <form [formGroup]="formBusqueda" (ngSubmit)="buscarUsuario()">
+      <input  type="text" class="input" placeholder="Escribí un nombre..." formControlName="nombreUsuario"/>
+      @if (sugerencias()) {
+      <ul class="sugerencias">
+        @for(usuario of sugerencias(); track usuario.nombreUsuario) {   
+          <li class="sugerencia" (click)="cambiarOrdenamiento('usuarioId',  usuario._id )">{{ usuario.nombreUsuario }}</li>
+        }
+      </ul>
+    }
+      
+      <button type="submit">Buscar</button>
+      <button (click)="cambiarOrdenamiento('usuarioId',  '' )">mostrar todos</button>
+    </form>
+
+
+    <div class="row g-3 align-items-center filtros-select-container">
+  
+      <div class="col-auto">
+        <label for="tipoPublicacionSelect" class="form-label">Tipo de Publicación:</label>
+      </div>
+        <div class="col-auto">
+          <select id="tipoPublicacionSelect" class="form-select" (change)="cambiarOrdenamiento('tipoPublicacion', $any($event.target).value)">
+            <option value="">Todos</option>
+            @for (tipo of TIPOS_PUBLICACION; track tipo) {
+              <option [value]="tipo">{{ tipo }}</option>
+            }
+          </select>
+        </div>
+      
+      <div class="col-auto">
+        <label for="deporteSelect" class="form-label">Deporte:</label>
+      </div>
+      <div class="col-auto">
+        <select id="deporteSelect" class="form-select" (change)="cambiarOrdenamiento('deporte', $any($event.target).value)">
+          <option value="">Todos</option>
+          @for (tipo of DEPORTES; track tipo) {
+            <option [value]="tipo">{{ tipo }}</option>
+          }
+        </select>
+      </div>
+      
+      <div class="col-auto">
+        <label for="predeterminadoSelect" class="form-label">Ordenar por:</label>
+      </div>
+      <div class="col-auto">
+        <select id="predeterminadoSelect" class="form-select" (change)="cambiarOrdenamiento('sortBy', $any($event.target).value)">
+          <option value="fecha">Fecha</option>
+          <option value="likes">Likes</option>
+        </select>
+      </div>
+  
+    </div>
+
+  </div>
+
+
+
+@if (!this.cargando()) {
+<div class="posts-list">
+    
+      @for (publicacion of publicaciones(); track publicacion._id) {
+          <app-publicaciones-card-component  
+          [publicacion]="publicacion" 
+          [usuarioActual]="usuarioActual()!" 
+          [acortarContenido]="true"
+          (publicacionActualizada)="actualizarPublicacion($event)"
+          (publicacionBorrada)="borrarPublicacion($event)"> 
+          
+          </app-publicaciones-card-component>
+      } @empty {
+        <p>No se encontraron publicaciones</p>
+      }
+    
+</div>
+
+    
+      <div class="d-flex justify-content-center my-4">
+        <button  (click)="paginaAnterior()" class="btn btn-outline-primary mx-3">Anterior</button> 
+        <button (click)="cambiarPagina()" class="btn btn-outline-primary mx-3">Siguiente</button>  
+      </div>
+} @else {
+  <div class="justify-content-center text-center my-4">
+    <span class="spinner-border spinner-border-sm" role="status"></span>
+    Cargando, por favor espere...
+  </div>
+  
+}
+    
+</div>
+
+
+
+

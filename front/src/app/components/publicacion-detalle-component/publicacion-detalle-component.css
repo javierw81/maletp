@@ -1,0 +1,251 @@
+.contenedor-comentarios {
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* ---------------------------------------------------------------------- */
+/* --- PALETA DE COLORES --- */
+/* Principal: #734443 */
+/* Secundario: #b8aba5 */
+/* Texto y Bordes Principal: #211f1c */
+/* Texto y Bordes Secundario: #4e3a3a */
+/* ---------------------------------------------------------------------- */
+
+.contenedor {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: #734443;
+}
+
+.contenedor-detalle-publicacion {
+    background-color: #b8aba5;
+    margin: 2rem;
+    margin-bottom: 6rem;
+    padding: 0.3rem;
+}
+
+/* ---------------------------------------------------------------------- */
+/* --- SECCIÓN DE COMENTARIOS --- */
+/* ---------------------------------------------------------------------- */
+
+.comentarios-seccion h2 {
+    color: #211f1c; 
+    margin-top: 0;
+    margin-bottom: 20px;
+    padding-left: 10px;
+}
+
+.fixed-comment-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 6rem;
+    left: 50%; 
+    transform: translateX(-50%);
+    background-color: #734443; 
+    z-index: 1000; 
+}
+
+/* --- Formulario de Comentario --- */
+
+.formulario-comentario {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.formulario-comentario textarea {
+    width: 100%;
+    padding: 10px;
+    max-height: 3rem;
+    width: 30rem;
+    margin-top: 1.5rem;
+    margin-right: 1rem;
+    border: 1px solid #4e3a3a; 
+    border-radius: 4px;
+    font-size: 1em;
+    background-color: #b8aba5;
+    color: #211f1c;
+}
+
+
+/* Mensaje de Error del Formulario */
+.error-mensaje {
+    color: #d32f2f;
+    font-size: 1rem;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.controles-formulario {
+    display: flex;
+}
+
+.contenedor-crear-mensaje {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.controles-botones {
+    display: flex;
+    justify-content: flex-end; 
+    gap: 10px;
+    max-height: 4rem;
+    margin-top: 1rem;
+}
+
+.btn-enviar-comentario {
+    background-color: #b8aba5;
+    color: #4e3a3a;
+    padding: 8px 15px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.btn-enviar-comentario:hover {
+    background-color: #4e3a3a; 
+    color: white;
+}
+
+.btn-enviar-comentario[disabled] {
+    background-color: #b8aba5;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.btn,.btn-cancelar {
+    background: none;
+    color: #4e3a3a; 
+    border: 1px solid #4e3a3a;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+
+.btn, .btn-cancelar:hover {
+    background-color: #b8aba5; 
+}
+
+/* --- Lista de Comentarios --- */
+.lista-comentarios {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-radius: 2rem;
+
+}
+
+.comentario-item {
+    border-top: 2px solid #211f1c;
+    display: flex;
+    gap: 10px; 
+    padding: 10px;
+    border-radius: 2rem;
+
+    transition: background-color 0.2s;
+
+}
+
+.comentario-item:hover {
+    background-color: rgb(230, 222, 222); 
+}
+
+.comentario-item.editando {
+    border-left: 3px solid #734443; 
+    padding-left: 7px;
+    background-color: rgba(115, 68, 67, 0.05);
+}
+
+.profile-photo-comentario {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 1px solid #b8aba5; 
+    flex-shrink: 0; 
+}
+
+.comentario-cuerpo {
+    flex-grow: 1; 
+    min-width: 0; 
+}
+
+.comentario-header {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.nombre-usuario-comentario {
+    font-weight: 700;
+    color: #211f1c; 
+    font-size: 0.95em;
+}
+
+.fecha-comentario, .editado-info {
+    font-size: 0.8em;
+    color: #4e3a3a; 
+    font-weight: 400;
+}
+
+.mensaje-comentario {
+    margin-top: 0;
+    margin-bottom: 5px;
+    color: #4e3a3a; 
+    line-height: 1.4;
+    word-wrap: break-word; 
+    max-width: 20rem;
+}
+
+.comentario-acciones {
+    display: flex;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.btn-editar, .btn-eliminar {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.8em;
+    font-weight: 600;
+    padding: 2px 5px;
+    border-radius: 3px;
+    transition: background-color 0.2s;
+}
+
+.btn-editar {
+    color: #734443; 
+}
+
+.btn-editar:hover {
+    background-color: rgba(115, 68, 67, 0.1);
+}
+
+.btn-eliminar {
+    color: #d32f2f; 
+}
+
+.btn-eliminar:hover {
+    background-color: #ffe0e0;
+}
+
+.sin-comentarios {
+    text-align: center;
+    color: #4e3a3a;
+    padding: 20px;
+    border: 1px dashed #b8aba5;
+    border-radius: 4px;
+}

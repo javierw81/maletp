@@ -1,0 +1,96 @@
+<div class="contenedor-mi-perfil">
+
+    <div class="perfil-deportista-container my-5 container">
+ 
+        <div class="card perfil-card">
+            
+                <div class="card-header p-0 text-center position-relative">
+                    <div class="banner-accion">
+                    <div class="banner-overlay"></div>
+                </div>
+
+                <div class="profile-photo-wrapper">
+                    <img [src]="usuarioActual()?.perfilImgUrl" alt="Foto de Perfil del deportista" class="img-fluid rounded-circle profile-photo-bs">
+                </div>
+                
+                <div class="name-titles mt-5 pt-5">
+                    <h1 class="username-title-bs"> {{ usuarioActual()?.nombreUsuario }}</h1>
+                    <p class="real-name-bs mb-3">{{ usuarioActual()?.apellido}}, {{usuarioActual()?.nombre}}</p>
+                </div>
+            </div>
+
+            <div class="card-body p-4 pt-0">
+                
+                
+            
+                <div class="row stats-bar-bs text-center mb-4 mx-0">
+                    <div class="col py-2 stat-item-bs border-end">
+                        <div class="stat-number-bs"> {{edad()}}</div>
+                        <div class="stat-label-bs">Años</div>
+                    </div>
+               
+                    <div class="col py-2 stat-item-bs">
+                        <div class="stat-number-bs">{{usuarioActual()?.createdAt | date:'dd/MM/yyyy': 'UTC' }}</div>
+                        <div class="stat-label-bs">miembro desde</div>
+                    </div>
+
+                    <div class="col py-2 stat-item-bs">
+                        <div class="stat-number-bs">{{usuarioActual()?.perfil}}</div>
+                        <div class="stat-label-bs">rol</div>
+                    </div>
+                </div>
+                
+
+                <div class="row info-panel-bs g-4 mb-5">
+                    <div class="col-md-5">
+                        <div class="p-3 info-card-bs h-100">
+                            <h5 class="info-title-bs">Sobre mi</h5>
+                            <p><strong><i class="bi bi-person"></i> Nombre y Apellido:</strong> {{usuarioActual()?.nombre}}, {{ usuarioActual()?.apellido}}</p>
+                            <p><strong><i class="bi bi-envelope"></i> Email:</strong> {{ usuarioActual()?.correo}}</p>
+                            <p><strong><i class="bi bi-calendar-event"></i> FecHa de nacimiento:</strong> {{usuarioActual()?.fechaNacimiento | date:'dd/MM/yyyy': 'UTC' }} </p>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-7">
+                        <div class="p-3 info-card-bs h-100">
+                            <h5 class="info-title-bs">Descripción</h5>
+                            <p class="bio-text-bs"> {{usuarioActual()?.descripcion}} </p>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="posts-section-bs">
+                    <h2 class="posts-title-bs mb-4">Últimas publicaciones</h2>
+                    
+                    <div class="posts-list">
+    
+                   
+                        @for (publicacion of publicaciones(); track publicacion._id) { 
+                                <div > 
+                                    <app-publicaciones-card-component  
+                                    class="post-card-bs"
+                                    [publicacion]="publicacion" 
+                                    [acortarContenido]="false"
+                                    [usuarioActual]="usuarioActual()!" 
+                                    (publicacionActualizada)="actualizarPublicacion($event)"
+                                    (publicacionBorrada)="borrarPublicacion($event)"> 
+                                    
+                                    </app-publicaciones-card-component>
+                                </div>
+                        } @empty {
+                            <p>Aún no tienes publicaiones.</p>
+                        }
+                    
+                    
+                    </div>
+                </div>
+
+
+
+                    <div class="text-center mt-4">
+                        <a routerLink="/publicaciones" class="btn btn-lg btn-success-custom all-posts-btn-bs">Ver todas las publicaciones</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,234 @@
+<div class="register-page-wrapper d-flex justify-content-center align-items-center">
+  
+    <div class="register-content p-4 p-md-5 shadow-lg rounded-3">
+    
+        <h3 class="title text-center mb-10 mt-30">¡Bienvenido a MatchPlay!</h3>
+        
+        <form (ngSubmit)="realizarRegistro()" [formGroup]="registroForm">
+        
+        <div class="row">
+
+        <div class="col-12 col-md-6 contenedor-form-1">
+            <div class="mb-3">
+                <label for="nombreUsuario" class="form-label"> Nombre de usuario </label>
+                <input type="nombreUsuario" formControlName="nombreUsuario" id="nombreUsuario" class="form-control custom-input"  placeholder="estoEsUnNombre" autocomplete="off" appRedInvalidInput>
+                
+                @if (registroForm.controls['nombreUsuario']?.hasError('required') && registroForm.controls['nombreUsuario']?.touched) {
+                    <div class="text-danger fw-bold">
+                    El nombre de usuario no debe estar vacio.
+                    </div>
+                } @else if (registroForm.controls['nombreUsuario']?.hasError('soloEspacios') && registroForm.controls['nombreUsuario']?.touched) {
+                    <div class="text-danger fw-bold">
+                    El nombre de usuario no debe contener solo espacios vacios.
+                    </div>
+                } @else if (registroForm.controls['nombreUsuario']?.hasError('maxlength') && registroForm.controls['nombreUsuario']?.touched) {
+                    <div class="text-danger fw-bold">
+                    El nombre de usuario no puede superar los 50 caracteres.
+                    </div>
+                } @else if (registroForm.controls['nombreUsuario']?.hasError('pattern') && registroForm.controls['nombreUsuario']?.touched) {
+                    <div class="text-danger fw-bold">
+                        El nombre de usuario no puede contener  "@".
+                    </div>
+                }
+            </div>
+            
+            <div class="mb-3">
+                <label for="correo" class="form-label"> Correo </label>
+                <input type="correo" formControlName="correo" id="correo" class="form-control custom-input"  placeholder="ejemplo@correo.com" autocomplete="off" appRedInvalidInput>
+                
+                @if (registroForm.controls['correo']?.hasError('required') && registroForm.controls['correo']?.touched) {
+                    <div class="text-danger fw-bold">
+                    El correo no debe estar vacio.
+                    </div>
+                } @else if (registroForm.controls['correo']?.hasError('soloEspacios') && registroForm.controls['correo']?.touched) {
+                    <div class="text-danger fw-bold">
+                    El correo no debe contener solo espacios vacios.
+                    </div>
+                } @else if (registroForm.controls['correo']?.hasError('email') && registroForm.controls['correo']?.touched) {
+                    <div class="text-danger fw-bold">
+                    El correo debe tener su respectivo formato.
+                    </div>
+                }
+            </div>
+
+            <div class="mb-3">
+                <label for="nombre" class="form-label"> Nombre </label>
+                <input type="nombre" formControlName="nombre" id="nombre" class="form-control custom-input" placeholder="tu nombre" autocomplete="off" appRedInvalidInput>
+                
+                @if (registroForm.controls['nombre']?.hasError('required') && registroForm.controls['nombre']?.touched) {
+                    <div class="text-danger fw-bold">
+                    El nombre no puede estar vacio.
+                    </div>
+                } @else if (registroForm.controls['nombre']?.hasError('soloEspacios') && registroForm.controls['nombre']?.touched) {
+                    <div class="text-danger fw-bold">
+                    El nombre no debe contener solo espacios vacios.
+                    </div>
+                } @else if (registroForm.controls['nombre']?.hasError('maxlength') && registroForm.controls['nombre']?.touched) {
+                    <div class="text-danger fw-bold">
+                    El nombre no puede superar los 50 caracteres.
+                    </div>
+                }
+            </div>
+
+            <div class="mb-3">
+                <label for="apellido" class="form-label"> Apellido  </label>
+                <input type="apellido" formControlName="apellido" id="apellido" class="form-control custom-input" placeholder="tu apellido" autocomplete="off" appRedInvalidInput>
+                
+                @if (registroForm.controls['apellido']?.hasError('required') && registroForm.controls['apellido']?.touched) {
+                    <div class="text-danger fw-bold">
+                    El apellido no puede estar vacio.
+                    </div>
+                } @else if (registroForm.controls['apellido']?.hasError('soloEspacios') && registroForm.controls['apellido']?.touched) {
+                    <div class="text-danger fw-bold">
+                    El apellido no debe contener solo espacios vacios.
+                    </div>
+                } @else if (registroForm.controls['apellido']?.hasError('maxlength') && registroForm.controls['apellido']?.touched) {
+                    <div class="text-danger fw-bold">
+                    El apellido no puede superar los 50 caracteres.
+                    </div>
+                }
+            </div>
+
+            <div class="mb-4">
+                <label for="fechaNacimiento" class="form-label">Fecha de nacimiento</label>
+                <input type="date" id="fechaNacimiento" formControlName="fechaNacimiento" class="form-control custom-input" appRedInvalidInput>
+
+                @if (registroForm.get('fechaNacimiento')?.hasError('fechaInvalida') && registroForm.get('fechaNacimiento')?.touched) {
+                    <div class="text-danger fw-bold">
+                    Ingrese una fecha de nacimiento válida.
+                    </div>
+                } @else if (registroForm.get('fechaNacimiento')?.hasError('menorDeEdad') && registroForm.get('fechaNacimiento')?.touched) {
+                    <div class="text-danger fw-bold">
+                    Debes tener mas de 16 años para poder ingresar.
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 contenedor-form-2">
+            
+            <div class="mb-3">
+                <label for="descripcion" class="form-label"> Descripción  </label>
+                <textarea 
+                formControlName="descripcion" 
+                id="descripcion" 
+                class="form-control custom-input" 
+                placeholder="tu descripcion" 
+                rows="3" 
+                autocomplete="off"
+                appRedInvalidInput
+            ></textarea>
+                
+                <div class="d-flex justify-content-end mt-1">
+                <small>
+                    {{ descripcionLength() }} / {{ MAX_DESCRIPCION_LENGTH }}
+                </small>
+                </div>
+
+                @if (registroForm.controls['descripcion']?.hasError('required') && registroForm.controls['descripcion']?.touched) {
+                    <div class="text-danger fw-bold">
+                    El descripción no puede estar vacia.
+                    </div>
+                } @else if (registroForm.controls['descripcion']?.hasError('soloEspacios') && registroForm.controls['descripcion']?.touched) {
+                    <div class="text-danger fw-bold">
+                    El descripción no debe contener solo espacios vacios.
+                    </div>
+                } @else if (registroForm.controls['descripcion']?.hasError('maxlength') && registroForm.controls['descripcion']?.touched) {
+                    <div class="text-danger fw-bold">
+                    El descripción no puede superar los 80 caracteres.
+                    </div>
+                }
+            </div>
+
+            <div class="mb-4">
+                <label for="password" class="form-label">Contraseña</label>
+                <input type="password" id="password" formControlName="password" class="form-control custom-input" placeholder="••••••••" appRedInvalidInput>
+
+                @if (registroForm.controls['password']?.hasError('required') && registroForm.controls['password']?.touched) {
+                <div class="text-danger fw-bold">
+                    La contraseña no debe ser vacia.
+                </div>
+                } @else if (registroForm.controls['password']?.hasError('pattern') && registroForm.controls['password']?.touched) {
+                    <div class="text-danger fw-bold">
+                    La contraseña debe tener una mayuscula, una minuscula y un numero.
+                </div>
+                } @else if (registroForm.controls['password']?.hasError('minlength') && registroForm.controls['password']?.touched) {
+                    <div class="text-danger fw-bold">
+                    La contraseña debe tener ocho caracteres.
+                </div>
+                }
+            </div>
+
+            <div class="mb-4">
+                <label for="confirmarPassword" class="form-label">Repetir contraseña</label>
+                <input type="password" id="confirmarPassword" formControlName="confirmarPassword" class="form-control custom-input" placeholder="••••••••" appRedInvalidInput>
+
+                @if (registroForm.controls['confirmarPassword'].invalid && registroForm.controls['confirmarPassword'].touched) {
+                <div class="text-danger fw-bold">
+                    La contraseña debe ser válida.
+                </div>
+                }
+
+                @if (
+                    registroForm.hasError('passwordsNoCoinciden') &&
+                    registroForm.get('password')?.value &&
+                    registroForm.get('confirmarPassword')?.value &&
+                    registroForm.get('confirmarPassword')?.touched
+                ) {
+                <div class="text-danger fw-bold">
+                    Las contraseñas no coinciden
+                </div>
+                }
+            
+            </div> 
+
+            <div class="mb-3">
+                <label for="perfilImg" class="form-label">Imagen de perfil</label>
+                <input type="file" id="perfilImg" (change)="seleccionarFile($event)" accept="image/*" >
+
+                @if (imagenTocada() && registroForm.get('perfilImg')?.errors?.['archivoRequerido'] ) {
+                <div class="text-danger fw-bold">
+                    Debes seleccionar una imagen.
+                </div>
+                } 
+
+            </div>
+        </div>
+        </div>
+
+        @if (imagenURL()) {
+            <div class="image-preview-container mb-3 text-center">
+                <img [src]="imagenURL()!" alt="Previsualización de perfil" class="img-thumbnail">
+            </div>
+        } @else {
+            <div class="image-preview-container mb-3 text-center">
+                <img src="../../../assets/register/icono-perfil.png" alt="Previsualización de perfil" class="img-thumbnail">
+            </div>
+        }
+
+
+        <button type="submit" class="btn custom-btn-primary w-100"  [disabled]="!registroForm.valid || cargando()"> Regístrate </button>
+
+        <div class="mt-3 text-center">
+            @if (cargando()) {
+            <div class="loading-message">
+                <span class="spinner-border spinner-border-sm" role="status"></span>
+                Cargando, por favor espere...
+            </div>
+            } 
+        
+            @if (mensajeDeError()) {
+            <div class="alert alert-danger custom-alert-danger fw-bold" role="alert">
+                {{mensajeDeError()}}
+            </div>
+            }
+        </div>
+
+        </form>
+
+        <p class="text-center mt-4 text-bottom">¿Ya tienes cuenta? 
+        <a class="custom-link" routerLink="/login"> Inicia sesión </a>
+        </p>
+
+  </div>
+</div>

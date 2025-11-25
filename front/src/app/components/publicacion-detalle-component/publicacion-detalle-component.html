@@ -1,0 +1,119 @@
+<div class="contenedor">
+
+
+<div class="contenedor-detalle-publicacion">
+    @if (publicacion() && usuarioActual()) {
+
+    
+    <app-publicaciones-card-component
+        [publicacion]="publicacion()!" 
+        [usuarioActual]="usuarioActual()!" 
+        [acortarContenido]="false"
+        (publicacionActualizada)="actualizarPublicacion($event)"
+        (publicacionBorrada)="borrarPublicacion()">
+    </app-publicaciones-card-component>
+
+
+
+    <div class="comentarios-seccion">
+
+        <h2>Comentarios</h2>
+
+            @if (cargandoComentarios()) {
+                <div class="justify-content-center text-center my-4">
+                    <span class="spinner-border spinner-border-sm" role="status"></span>
+                    Cargando, por favor espere...
+                </div>
+            }
+        
+            @if (comentarios().length === 0) {
+                <p class="sin-comentarios">Sé el primero en comentar.</p>
+            } @else {
+                <div class="lista-comentarios">
+                    @for (comentario of comentarios(); track comentario._id) {
+                        <div class="comentario-item" [class.editando]="comentarioAEditar() && comentarioAEditar()!._id === comentario._id"> 
+                            
+                            <img [src]="comentario.usuarioId.perfilImgUrl" alt="imagen-usuario" class="profile-photo-comentario">
+                            
+                            <div class="comentario-cuerpo">
+                                <div class="comentario-header">
+                                    <span class="nombre-usuario-comentario">{{comentario.usuarioId.nombreUsuario}}</span>
+                                    <span class="fecha-comentario" [title]="comentario.createdAt | date:'medium'">
+                                        {{comentario.createdAt | date:'shortTime'}}
+                                    </span>
+                                </div>
+                                
+                                <p class="mensaje-comentario">{{comentario.mensaje}}</p>
+                                
+                                @if (comentario.modificado) {
+                                    <span class="editado-info">(editado)</span>
+                                }
+
+                                @if (comentario.usuarioId._id === usuarioActual()!._id) {
+                                    <div class="comentario-acciones">
+                                        <button class="btn-editar" (click)="iniciarEdicion(comentario)">Editar</button>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+
+                    }
+
+                    @if ( !cargandoComentarios() && !maximoComentarios()) {
+                        <button type="button" (click)="obtenerMasComentarios()" class="btn">
+                        Cargar más
+                        </button>
+                    }
+                </div>
+            } 
+            
+        <div class="fixed-comment-bar">
+            <div class="formulario-comentario-wrapper">
+                <form [formGroup]="commentForm" (ngSubmit)="guardarComentario()"  class="formulario-comentario">
+
+                <div class="contenedor-crear-mensaje">
+                    <textarea formControlName="mensaje"
+                            class="form-control"
+                            [placeholder]="comentarioAEditar() ? 'Editando comentario...' : 'Escribe tu comentario aquí...'"
+                            required
+                            appRedInvalidInput></textarea>
+                
+                @if (commentForm.get('mensaje')?.invalid && (commentForm.get('mensaje')?.dirty || commentForm.get('mensaje')?.touched)) {
+                    <span class="text-danger fw-bold">
+                    @if (commentForm.get('mensaje')?.errors?.['required']) {
+                        El comentario es obligatorio.
+                    } @else if (commentForm.get('mensaje')?.errors?.['soloEspacios']) {
+                        El comentario no puede ser solo espacios.
+                    } @else if (commentForm.get('mensaje')?.errors?.['maxlength']) {
+                        El comentario es demasiado largo, maximo 80 caracteres.
+                    }
+                </span>
+                }
+                </div>
+
+                <div class="controles-botones">
+                    @if (comentarioAEditar()) {
+                    <button type="button" (click)="cancelarEdicion()" class="btn-cancelar">
+                        Cancelar
+                    </button>
+                    }
+                    
+                    <button type="submit" class="btn-enviar-comentario" [disabled]="commentForm.invalid">
+                    {{ comentarioAEditar() ? 'Guardar Cambios' : 'Publicar Comentario' }}
+                    </button>
+                </div>
+
+                </form>
+  </div>
+</div>
+    </div>
+
+    } @else {
+        <div class="justify-content-center text-center">
+            <span class="spinner-border spinner-border-sm" role="status"></span>
+            Cargando, por favor espere...
+        </div>
+    }
+
+</div>
+</div>

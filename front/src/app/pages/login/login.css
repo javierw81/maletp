@@ -1,0 +1,73 @@
+/* Paleta de Colores
+   Principal: #734443 | Secundario: #b8aba5 
+   Texto Principal: #211f1c | Texto Secundario: #4e3a3a 
+*/
+
+
+.login-page-wrapper {
+  background-color:  #b8aba5; 
+}
+
+.login-content {
+  width: 30rem;
+  background-color: #b8aba5;
+  border: 0.2rem solid #734443; 
+  box-shadow: 0 1rem 1rem rgba(33, 31, 28, 0.15);
+}
+
+.title {
+  color: #211f1c; 
+  font-weight: 500;
+  font-weight: bold;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+
+.form-label, .text-bottom {
+  color: #4e3a3a !important; 
+  font-weight: bold;
+}
+
+.custom-input {
+  border: 0.1rem solid #4e3a3a; 
+  color: #211f1c; 
+}
+
+
+.custom-input:focus {
+  border-color: #734443; 
+  box-shadow: 0 0 0 0.25rem rgba(128, 3, 1, 0.25);
+}
+
+
+.custom-btn-primary {
+  background-color: #734443; 
+  color: #fff;
+  font-weight: bold;
+}
+
+.custom-btn-primary:hover:not(:disabled) {
+  background-color: #552b2a; 
+}
+
+.custom-btn-primary:disabled {
+  background-color: #a0a0a0;
+  border-color: #a0a0a0;
+  opacity: 0.8;
+}
+
+.custom-link {
+  color: #734443; 
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.custom-link:hover {
+  text-decoration: underline;
+  color: #4d1d1c;
+}
+
+.loading-message {
+  color: #734443; 
+  font-weight: 500;
+}

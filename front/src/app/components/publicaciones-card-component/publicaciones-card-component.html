@@ -1,0 +1,79 @@
+<div class="card-publicacion">
+
+    <div class="post-header">
+        <div class="user-info">
+
+            <div class="profile-data">
+                <div class="profile-photo"> 
+                <img [src]="publicacion().usuarioId.perfilImgUrl" alt="imagen-usuario" class="img-fluid rounded-circle profile-photo-bs">
+                </div>
+
+                <span class="username">{{ publicacion().usuarioId.nombreUsuario | truncateText: 10 : acortarContenido()}}</span>
+            </div>
+            
+            
+            <span class="post-date">
+                Publicado: {{ publicacion().createdAt| date:'dd/MM/yyyy, h:mm a' }}
+            </span>
+        </div>
+        
+        @if (verificarPoderEliminarPublicacion()) {
+            <button (click)="preguntarBorrarPublicacion()" class="btn-delete" title="Eliminar publicación">
+                borrar
+            </button>
+        }
+    </div>
+
+    <div class="post-content">
+        <h3 class="post-title">{{ publicacion().titulo | truncateText: 35 : acortarContenido()}}</h3> 
+        <p class="post-text">{{ publicacion().mensaje | truncateText: 45 : acortarContenido() }}</p>
+
+
+        @if(publicacion().postImgUrl) {
+            <img [src]="publicacion().postImgUrl" alt="a" class="img-fluid">
+        } @else {
+        }
+        
+    </div>
+    
+    <div class="post-tags">
+        <span class="tag tag-deporte">
+            {{ publicacion().deporte }}
+        </span>
+        
+        <span class="tag tag-tipo" appTypeTagDirective [appTipoTag]="publicacion().tipoPublicacion">
+            {{ publicacion().tipoPublicacion | titlecase }}
+        </span>
+    </div>
+
+    <div class="post-actions">
+        
+        <button 
+            (click)="agregarOEliminarLike()" 
+            class="btn-action btn-like" 
+            [class.liked]="verificarMeGusta()">
+            
+            @if (verificarMeGusta()) {
+                <img src="../../../assets/posts/corazon-rojo.svg" alt="">
+            } @else {
+                <img src="../../../assets/posts/corazon.svg" alt="">
+            }
+            
+            <span class="like-count">{{ publicacion().meGusta.length }} Me gusta</span>
+        </button>
+
+        <button class="btn-action btn-comment" (click)="verDetalle(publicacion()._id)">
+           <img src="../../../assets/posts/burbuja-chat.svg" alt=""> Comentarios ({{ publicacion().comentarios.length }}) 
+        </button>
+
+        @if (acortarContenido()) {
+            <button class="btn-ver-detalle" (click)="verDetalle(publicacion()._id)">
+                <span>➪</span>
+            </button>
+        }
+
+    </div>
+
+    
+</div>
+
